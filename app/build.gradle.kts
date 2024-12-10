@@ -57,8 +57,12 @@ dependencies {
     implementation(libs.androidx.navigation.ui)
 
     implementation(libs.android.dagger.hilt)
-    kapt(libs.dagger.kpt)
+    kapt(libs.android.dagger.kpt)
     implementation(libs.androidx.dagger.hilt.navigation.fragment)
+
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.rxjava2)
+    implementation(libs.retrofit.converter.gson)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
