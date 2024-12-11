@@ -2,32 +2,44 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dim_56"
-
         app:layout_constraintEnd_toStartOf="@+id/navHostFragment"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/toolbarIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/dim_12"
-            android:src="@drawable/ic_back" />
+            <ImageView
+                android:id="@+id/toolbarIcon"
+                android:layout_width="@dimen/dim_18"
+                android:layout_height="@dimen/dim_18"
+                android:layout_marginVertical="@dimen/dim_12"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:padding="@dimen/dim_2"/>
 
-        <TextView
-            android:id="@+id/toolBarTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dim_16"
-            android:layout_gravity="left"
-            />
+            <TextView
+                android:id="@+id/toolBarTitle"
+                android:layout_width="@dimen/dim_0"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginLeft="@dimen/dim_8"
+                app:layout_constraintStart_toEndOf="@+id/toolbarIcon"
+                android:textSize="@dimen/size_18"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </com.google.android.material.appbar.MaterialToolbar>
 
 
