@@ -1,6 +1,7 @@
 package com.deyber.hackernews.di.network
 
 import com.deyber.hackernews.core.network.NetworkConfig.API_BASE_URL
+import com.deyber.hackernews.core.utils.HtmlDeserializer
 import com.deyber.hackernews.data.service.NewsService
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -11,8 +12,6 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-import javax.net.ssl.HostnameVerifier
-import javax.net.ssl.SSLSocketFactory
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -20,7 +19,10 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(client: OkHttpClient): Retrofit {
-        val gson = GsonBuilder().serializeNulls().create()
+        val gson = GsonBuilder()
+            .serializeNulls()
+            .registerTypeAdapter(String::class.java, HtmlDeserializer())
+            .create()
         return Retrofit.Builder()
             .baseUrl(API_BASE_URL)
             .client(client)

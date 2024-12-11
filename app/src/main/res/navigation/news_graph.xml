@@ -7,5 +7,16 @@
     <fragment
         android:id="@+id/homeNewsFragment"
         android:name="com.deyber.hackernews.ui.fragments.HomeNewsFragment"
-        android:label="HomeNewsFragment" />
+        android:label="HomeNewsFragment" >
+        <action
+            android:id="@+id/action_to_detail_hint"
+            app:destination="@id/hintDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/hintDetailFragment"
+        android:name="com.deyber.hackernews.ui.fragments.HintDetailFragment"
+        android:label="HintDetailFragment" />
+    <argument
+        android:name="urlHint"
+        app:argType="string" />
 </navigation>

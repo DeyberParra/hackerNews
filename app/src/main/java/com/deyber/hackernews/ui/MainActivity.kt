@@ -1,6 +1,7 @@
 package com.deyber.hackernews.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -22,6 +23,7 @@ class MainActivity: AppCompatActivity(){
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         navController = navHostFragment.navController
         setupBackPressed()
+        supportActionBar?.hide()
 
     }
 
@@ -32,6 +34,5 @@ class MainActivity: AppCompatActivity(){
             }
         }
     }
-
 
 }
