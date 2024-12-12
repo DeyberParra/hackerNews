@@ -1,5 +1,8 @@
 package com.deyber.hackernews.domain.model.ui
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 data class NewsResponseModel(
     val exhaustive: ExhaustiveModel? = null,
     val exhaustiveNbHits: Boolean? = null,
@@ -21,6 +24,7 @@ data class ExhaustiveModel(
     val typo: Boolean? = null
 )
 
+@Parcelize
 data class HitModel(
     val highlightResult: HighlightResultModel? = null,
     val tags: List<String>? = null,
@@ -34,20 +38,21 @@ data class HitModel(
     val storyTitle: String? = null,
     val storyUrl: String? = null,
     val updatedAt: String? = null
-)
+) : Parcelable
 
+@Parcelize
 data class HighlightResultModel(
     val author: HighlightFieldModel? = null,
     val commentText: HighlightFieldModel? = null,
     val storyTitle: HighlightFieldModel? = null,
     val storyUrl: HighlightFieldModel? = null
-)
-
+) : Parcelable
+@Parcelize
 data class HighlightFieldModel(
     val matchLevel: String? = null,
     val matchedWords: List<String>? = null,
     val value: String? = null
-)
+):Parcelable
 
 data class ProcessingTimingsMSModel(
     val request: RequestTimingModel? = null,

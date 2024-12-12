@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.gradle.detekt)
     id("kotlin-kapt")
+    id("kotlin-parcelize")
     alias(libs.plugins.android.hilt)
 
 }
@@ -47,6 +48,8 @@ android {
 
 dependencies {
 
+    implementation(project(":database"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -55,6 +58,9 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
+
+    implementation(libs.swipe.recyclerview)
+    implementation(libs.swiperefresh)
 
     implementation(libs.android.dagger.hilt)
     kapt(libs.android.dagger.kpt)
@@ -65,8 +71,11 @@ dependencies {
     implementation(libs.retrofit.converter.gson)
 
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation (libs.mockk)
+    testImplementation(libs.coroutine.test)
+
+
+
 
 
 

@@ -7,18 +7,31 @@ import com.deyber.hackernews.core.utils.toTimeAgoFromString
 import com.deyber.hackernews.databinding.NewSnippetItemBinding
 import com.deyber.hackernews.domain.model.ui.HitModel
 
-class HitsAdapter (
-    private val newSnippetClicked : (item : HitModel)->Unit
-): RecyclerView.Adapter<HitsAdapter.ViewHolder>()  {
+class HitsAdapter(
+    private val newSnippetClicked: (item: HitModel) -> Unit
+) : RecyclerView.Adapter<HitsAdapter.ViewHolder>() {
 
     private var hits: List<HitModel> = listOf()
 
-    fun  setupHint(list : List<HitModel>){
+    fun setupHint(list: List<HitModel>) {
         hits = list
         notifyDataSetChanged()
     }
 
-    class ViewHolder (v: NewSnippetItemBinding): RecyclerView.ViewHolder(v.root){
+    fun getItemByPosition(position: Int): HitModel? {
+        return if (position <= hits.size) {
+            hits[position]
+        } else null
+    }
+
+    fun removeItem(position: Int) {
+        if (position in hits.indices) {
+            hits.drop(position)
+            notifyItemRemoved(position)
+        }
+    }
+
+    class ViewHolder(v: NewSnippetItemBinding) : RecyclerView.ViewHolder(v.root) {
         val title = v.snippetMessage
         val subtitle = v.snippetAuthor
         val container = v.root
@@ -37,12 +50,14 @@ class HitsAdapter (
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = hits[position]
-       with(holder){
-           title.text = item.storyTitle
-           subtitle.text = "${item.author} - ${item.createdAt?.toTimeAgoFromString()}"
-           container.setOnClickListener {
-               newSnippetClicked.invoke(item)
-           }
-       }
+        with(holder) {
+            title.text = ""
+            subtitle.text = ""
+            title.text = item.storyTitle
+            subtitle.text = "${item.author} - ${item.createdAt?.toTimeAgoFromString()}"
+            container.setOnClickListener {
+                newSnippetClicked.invoke(item)
+            }
+        }
     }
 }

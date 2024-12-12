@@ -2,6 +2,7 @@ package com.deyber.hackernews.di.useCases
 
 import com.deyber.hackernews.data.repository.NewsRepository
 import com.deyber.hackernews.di.repository.NewsRepositoryQualifier
+import com.deyber.hackernews.domain.DeleteHitUseCase
 import com.deyber.hackernews.domain.GetNewsUseCase
 import dagger.Module
 import dagger.Provides
@@ -21,4 +22,11 @@ object UseCasesModule {
         repository: NewsRepository
     ): GetNewsUseCase = GetNewsUseCase(repository)
 
+    @Provides
+    @Singleton
+    @DeleteHitUseCasesQualifier
+    fun providesDeleteHitUseCase(
+        @NewsRepositoryQualifier
+        repository: NewsRepository
+    ): DeleteHitUseCase = DeleteHitUseCase(repository)
 }

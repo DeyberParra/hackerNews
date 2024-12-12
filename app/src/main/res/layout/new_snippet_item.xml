@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="@dimen/dim_8">
+    android:layout_height="@dimen/dim_70"
+    android:padding="@dimen/dim_8"
+    >
 
     <TextView
         android:id="@+id/snippetMessage"
@@ -15,16 +15,21 @@
         app:layout_constraintTop_toTopOf="parent"
         android:textStyle="bold"
         android:textSize="@dimen/size_14"
-        tools:text="ESTE EST UN LINDO TITULO" />
+        android:maxLines="2"
+        android:ellipsize="end"
+        />
 
     <TextView
         android:id="@+id/snippetAuthor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dim_4"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="@dimen/size_12"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/snippetMessage"
-        tools:text="este es el author"
-        android:textSize="@dimen/size_12"/>
+        app:layout_constraintTop_toBottomOf="@id/snippetMessage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

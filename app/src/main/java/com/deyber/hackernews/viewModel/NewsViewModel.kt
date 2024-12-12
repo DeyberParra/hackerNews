@@ -2,44 +2,46 @@ package com.deyber.hackernews.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.deyber.hackernews.core.network.Resource
 import com.deyber.hackernews.core.network.doFailure
-import com.deyber.hackernews.core.network.doLoading
 import com.deyber.hackernews.core.network.doSuccess
+import com.deyber.hackernews.di.useCases.DeleteHitUseCasesQualifier
 import com.deyber.hackernews.di.useCases.GetNewsUseCasesQualifier
+import com.deyber.hackernews.domain.DeleteHitUseCase
 import com.deyber.hackernews.domain.GetNewsUseCase
 import com.deyber.hackernews.domain.model.ui.HitModel
-import com.deyber.hackernews.domain.model.ui.NewsResponseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NewsViewModel  @Inject constructor(
+class NewsViewModel @Inject constructor(
     @GetNewsUseCasesQualifier
     private val getNewsUseCase: GetNewsUseCase,
-    state: SavedStateHandle
-): ViewModel(){
+    @DeleteHitUseCasesQualifier
+    private val deleteHitUseCase: DeleteHitUseCase,
+) : ViewModel() {
 
-    private val _news = state.getLiveData<NewsResponseModel>("news")
-    val news : LiveData<NewsResponseModel> = _news
+    private val _hits = MutableLiveData<Resource<List<HitModel>>>()
+    val hits: LiveData<Resource<List<HitModel>>> = _hits
 
-
-    fun getNews(){
-        viewModelScope.launch(Dispatchers.IO) {
+    fun getNews() {
+        _hits.postValue(Resource.Loading())
+        viewModelScope.launch {
             val news = getNewsUseCase.invoke()
-            news.doLoading {
+            _hits.postValue(news)
+        }
+    }
 
+    fun deleteHit(hit: HitModel) {
+        viewModelScope.launch {
+            val deleteHitResponse = deleteHitUseCase.invoke(hit.storyId!!, hit.createdAtI!!)
+            deleteHitResponse.doSuccess {
+                getNews()
             }
-            news.doSuccess { new ->
-                _news.postValue(new)
-            }
-
-            news.doFailure { error, throwable, typeErrorType ->
-
+            deleteHitResponse.doFailure { error, throwable, typeErrorType ->
             }
         }
     }

@@ -23,3 +23,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "HackerNews"
 include(":app")
+include(":database")

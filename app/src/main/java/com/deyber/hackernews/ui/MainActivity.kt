@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity(), ToolbarHandler {
         navController = navHostFragment.navController
         setupBackPressed()
         supportActionBar?.hide()
-        binding.toolbarIcon.setOnClickListener { handleToolbarBackAction() }
+        binding.toolbarBack.setOnClickListener { handleToolbarBackAction() }
 
     }
 

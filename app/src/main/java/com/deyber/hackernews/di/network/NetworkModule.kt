@@ -1,12 +1,16 @@
 package com.deyber.hackernews.di.network
 
+import android.content.Context
 import com.deyber.hackernews.core.network.NetworkConfig.API_BASE_URL
+import com.deyber.hackernews.core.network.NetworkUtils
 import com.deyber.hackernews.core.utils.HtmlDeserializer
 import com.deyber.hackernews.data.service.NewsService
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -39,6 +43,10 @@ object NetworkModule {
     @Provides
     @Singleton
     @NewsServiceQualifier
-    fun provideNewService( retrofit: Retrofit) = retrofit.create(NewsService::class.java)
+    fun provideNewService(retrofit: Retrofit) = retrofit.create(NewsService::class.java)
 
+    @Provides
+    @Singleton
+    @NetworkUtilsQualifier
+    fun provideNetworkUtils(@ApplicationContext context: Context) = NetworkUtils(context)
 }

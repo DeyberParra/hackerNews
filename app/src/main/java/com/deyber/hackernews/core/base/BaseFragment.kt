@@ -8,11 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.deyber.hackernews.ui.MainActivity
 
-abstract class BaseFragment<T: ViewBinding>(private val bindingInflater:(LayoutInflater, ViewGroup?, Boolean)->T) : Fragment() {
+abstract class BaseFragment<T : ViewBinding>(private val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> T) :
+    Fragment() {
 
     private var _binding: T? = null
 
-    protected val binding get() = _binding !!
+    protected val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,20 +37,20 @@ abstract class BaseFragment<T: ViewBinding>(private val bindingInflater:(LayoutI
 
     }
 
-    open fun setupUI(){}
+    open fun setupUI() {}
 
-    open fun setupObserver(){}
+    open fun setupObserver() {}
 
-    open fun setupListener(){}
+    open fun setupListener() {}
 
-    protected fun showToolbar( isVisible: Boolean = true){
-        if(activity is MainActivity){
+    protected fun showToolbar(isVisible: Boolean = true) {
+        if (activity is MainActivity) {
             (activity as MainActivity).showToolbar(isVisible)
         }
     }
 
-    protected fun setupToolbarTitle(title: String){
-        if(activity is MainActivity){
+    protected fun setupToolbarTitle(title: String) {
+        if (activity is MainActivity) {
             (activity as MainActivity).setToolbarTitle(title)
         }
     }

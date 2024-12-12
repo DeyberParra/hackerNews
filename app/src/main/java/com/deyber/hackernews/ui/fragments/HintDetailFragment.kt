@@ -56,4 +56,16 @@ class HintDetailFragment :
             loadUrl(url)
         }
     }
+
+    override fun onDestroyView() {
+        binding.webView.apply {
+            clearHistory()
+            clearCache(true)
+            loadUrl("about:blank")
+            onPause()
+            removeAllViews()
+            destroy()
+        }
+        super.onDestroyView()
+    }
 }
