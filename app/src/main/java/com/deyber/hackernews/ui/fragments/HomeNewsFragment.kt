@@ -51,8 +51,11 @@ class HomeNewsFragment : BaseFragment<FragmemtHomeNewsBinding>(FragmemtHomeNewsB
                 }
                 findNavController().navigate(R.id.action_to_detail_hint, bundle)
             } else {
-                Toast.makeText(requireContext(), "Sin  contenido que mostrar", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(
+                    requireContext(),
+                    requireContext().getString(R.string.home_news_no_url_found),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 

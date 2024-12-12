@@ -5,4 +5,11 @@
     <string name="new_rep_failed_fetch_data_message">Failed to fetch data</string>
     <string name="new_rep_failed_fetch_network_message">Failed to fetch data</string>
     <!-- NewsRepositoryImp (BOTTOM)-->
+
+    <!-- HomeNewsFragment (TOP)-->
+    <string name="home_news_no_url_found">No hay contenido que mostrar</string>
+
+    <!-- HomeNewsFragment (BOTTOM)-->
+
+
 </resources>
